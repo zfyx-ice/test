@@ -14,20 +14,22 @@
 
 {% block style %}
 <style>
-.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
-.title-right{display:flex;margin:auto 0 0 auto;}
-.title-right .circle{padding: 14px 16px;margin-right:8px;}
+。postTitle{margin:0 auto;font-size:40px;font-weight:bold;}
+.postTitle::after{content:'|';animation:blink 1s infinite;font-family:fantasy;font-weight:normal;vertical-align:text-top;}
+。no-blink::after{animation:none;}
+。title-right{display:flex;margin:auto 0 0 auto;}
+。title-right 。circle{padding: 14px 16px;}
 #postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
 #postBody hr{height:2px;}
 #cmButton{height:48px;margin-top:48px;}
 #comments{margin-top:64px;}
-.g-emoji{font-size:24px;}
+。g-emoji{font-size:24px;}
 @media (max-width: 600px) {
     body {padding: 8px;}
-    .postTitle{font-size:24px;}
+    。postTitle{font-size:24px;}
 }
 {% if blogBase['highlight']!=0 -%}
-.copy-feedback {
+。copy-feedback {
     display: none;
     position: absolute;
     top: 10px;
@@ -44,27 +46,31 @@
 {% endblock %}
 {% block header %}
 <h1 class="postTitle">{{ blogBase['postTitle'] }}</h1>
-<div class="title-right">
-    <a href="{{ blogBase['homeUrl'] }}" id="buttonHome" class="btn btn-invisible circle" title="{{ i18n['home'] }}">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathHome" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    {% if blogBase['showPostSource']==1 %}
-    <a href="{{ blogBase['postSourceUrl'] }}" target="_blank" class="btn btn-invisible circle" title="Issue">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathIssue" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    {% endif %}
+{% endblock %}
 
-    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="{{ i18n['switchTheme'] }}" {%- if blogBase['themeMode']=='fix' -%}style="display:none;"{%- endif -%}>
-        <svg class="octicon" width="16" height="16" >
-            <path id="themeSwitch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
+{% block functionBtn %}
+<a href="{{ blogBase['homeUrl'] }}" id="buttonHome" class="btn btn-invisible circle" title="{{ i18n['home'] }}">
+	<svg class="octicon" width="16" height="16"><path id="pathHome" fill-rule="evenodd"></path></svg>
+</a>
+{% if blogBase['showPostSource']==1 %}
+<a href="{{ blogBase['postSourceUrl'] }}" target="_blank" class="btn btn-invisible circle" title="Issue">
+	<svg class="octicon" width="16" height="16"><path id="pathIssue" fill-rule="evenodd"></path></svg>
+</a>
+{% endif %}
 
-</div>
+<a class="btn btn-invisible circle" onclick="modeSwitch();" title="{{ i18n['switchTheme'] }}" {%- if blogBase['themeMode']=='fix' -%}style="display:none;"{%- endif -%}>
+	<svg class="octicon" width="16" height="16" ><path id="themeSwitch" fill-rule="evenodd"></path></svg>
+</a>
+
+<a href="{{ blogBase['homeUrl'] }}/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="{{ i18n['Search'] }}">
+	<svg class="octicon" width="16" height="16" >
+		<path id="pathSearch" fill-rule="evenodd"></path>
+	</svg>
+</a>
+
+<a class="ArticleTOC btn btn-invisible circle" title="文章目录">
+	<svg class="octicon" width="16" height="16"><path></path></svg>
+</a>
 {% endblock %}
 
 {% block content %}
